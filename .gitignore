@@ -1,0 +1,14 @@
+# Virtual Environments
+ml-3.11venv/
+ml-venv/
+
+# Cache files
+__pycache__/
+*.pyc
+
+# Compressed files
+*.zip
+*.rar
+
+# IDE Settings
+.vscode/

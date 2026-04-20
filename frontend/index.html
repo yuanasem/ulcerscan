@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DentaScreen - Skrining Ulcer Oral</title>
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-container">
+            <div class="logo-icon"><i class="fa-solid fa-tooth"></i></div>
+            <div class="header-title">
+                <h1>DentaScreen</h1>
+                <p>Sistem Deteksi Ulcer Oral Pintar</p>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main>
+        <!-- Navigation Tabs -->
+        <nav class="tabs-nav">
+            <button class="tab-btn active" data-target="tab-skrining">
+                <i class="fa-solid fa-microscope"></i> Skrining
+            </button>
+            <button class="tab-btn" data-target="tab-edukasi">
+                <i class="fa-solid fa-book-medical"></i> Edukasi
+            </button>
+            <button class="tab-btn" data-target="tab-riwayat">
+                <i class="fa-solid fa-clock-rotate-left"></i> Riwayat
+            </button>
+        </nav>
+
+        <!-- TAB: SKRINING -->
+        <section id="tab-skrining" class="tab-content active">
+            <div class="grid-2">
+                <!-- Upload Panel -->
+                <div class="card">
+                    <div class="card-header">
+                        <h2 class="card-title"><i class="fa-regular fa-image"></i> Upload Gambar</h2>
+                        <p class="card-desc">Unggah atau tarik gambar sariawan untuk dianalisis.</p>
+                    </div>
+                    <div class="card-body">
+                        <div class="upload-area" id="drop-zone">
+                            <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp">
+                            <div id="upload-prompt">
+                                <i class="fa-solid fa-cloud-arrow-up"></i>
+                                <h3>Klik atau Tarik Gambar Kesini</h3>
+                                <p>Mendukung format JPG, PNG, atau WEBP</p>
+                            </div>
+                            <div class="image-preview-container" id="preview-container">
+                                <img id="image-preview" src="" alt="Preview">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <button class="btn btn-primary" id="btn-analyze" disabled>
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Analisis Sariawan
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Result Panel -->
+                <div class="result-container">
+                    <div class="empty-state" id="empty-state">
+                        <i class="fa-solid fa-stethoscope"></i>
+                        <p>Hasil analisis akan muncul di sini setelah Anda mengunggah gambar dan menekan tombol Analisis.</p>
+                    </div>
+
+                    <div class="card" id="result-card">
+                        <div class="card-header">
+                            <div>
+                                <h2 class="card-title">Hasil Analisis</h2>
+                                <p class="card-desc">Berdasarkan deteksi citra (Simulasi)</p>
+                            </div>
+                            <span class="badge badge-success">94.2% Akurat</span>
+                        </div>
+                        <div class="card-body">
+                            <div class="result-grid">
+                                <div class="result-box">
+                                    <label><i class="fa-solid fa-virus"></i> Jenis Ulcer</label>
+                                    <div class="value" id="res-type">Sariawan Minor</div>
+                                </div>
+                                <div class="result-box">
+                                    <label><i class="fa-solid fa-triangle-exclamation"></i> Keparahan</label>
+                                    <div class="value" id="res-severity">Sedang</div>
+                                </div>
+                            </div>
+                            <div class="recommendation-box">
+                                <h4><i class="fa-solid fa-prescription-bottle-medical"></i> Rekomendasi Penanganan</h4>
+                                <p id="res-recommendation">Gunakan obat kumur antiseptik 2x sehari dan hindari makanan pedas/asam. Konsultasikan ke dokter jika tidak membaik.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB: EDUKASI -->
+        <section id="tab-edukasi" class="tab-content">
+            <!-- Edukasi content (sama seperti file asli) -->
+        </section>
+
+        <!-- TAB: RIWAYAT -->
+        <section id="tab-riwayat" class="tab-content">
+            <!-- Riwayat content (sama seperti file asli) -->
+        </section>
+    </main>
+
+    <!-- JS -->
+    <script src="script.js"></script>
+</body>
+</html>
