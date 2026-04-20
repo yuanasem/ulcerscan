@@ -59,46 +59,43 @@ document.addEventListener('DOMContentLoaded', () => {
         reader.readAsDataURL(file);
     }
 
-    // Koneksi ke Backend Production
-    btnAnalyze.addEventListener('click', async () => {
-        if (!selectedFile) return;
+    // Koneksi ke Backend Production (update URL sesuai dengan deployment)
+btnAnalyze.addEventListener('click', async () => {
+    const formData = new FormData();
+    const file = fileInput.files[0];
+    
+    // PERUBAHAN 1: Pakai 'image' sesuai request.files['image'] di Python
+    formData.append('image', file); 
 
-        // UI Loading State
-        const originalBtnText = btnAnalyze.innerHTML;
-        btnAnalyze.innerHTML = '<i class="fa-solid fa-circle-notch spin"></i> Menganalisis...';
-        btnAnalyze.disabled = true;
+    btnAnalyze.innerHTML = '<i class="fa-solid fa-spinner spin"></i> Menganalisis...';
+    btnAnalyze.setAttribute('disabled', 'true');
 
-        const formData = new FormData();
-        formData.append('file', selectedFile);
+    try {
+        // PERUBAHAN 2: Sesuaikan path URL dengan /api/predict
+        const response = await fetch('https://ulcerscan-production.up.railway.app/api/predict', {
+            method: 'POST',
+            body: formData
+        });
 
-        try {
-            // Ganti URL sesuai endpoint backend production kamu
-            const response = await fetch('https://ulcerscan-production.up.railway.app', {
-                method: 'POST',
-                body: formData
-            });
-
-            if (!response.ok) throw new Error('Gagal menghubungi server');
-
-            const data = await response.json();
-
-            // Mapping Data dari API ke UI Terbaru
-            document.getElementById('res-type').textContent = data.class_name || 'Tidak Terdeteksi';
-            document.getElementById('res-severity').textContent = data.severity || 'Normal';
-            document.getElementById('res-confidence').textContent = `${(data.confidence * 100).toFixed(1)}% Akurat`;
-            document.getElementById('res-recommendation').textContent = data.recommendation || 'Tetap jaga kebersihan mulut.';
-            document.getElementById('res-date').textContent = new Date().toLocaleTimeString();
-
-            // Tampilkan Hasil
-            emptyState.style.display = 'none';
-            resultCard.style.display = 'block';
-
-        } catch (error) {
-            console.error(error);
-            alert('Terjadi kesalahan saat analisis: ' + error.message);
-        } finally {
-            btnAnalyze.innerHTML = originalBtnText;
-            btnAnalyze.disabled = false;
+        if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Gagal menganalisis');
         }
-    });
-});
+
+        const data = await response.json();
+
+        // Update UI dengan hasil dari server
+        document.getElementById('res-type').innerText = data.type;
+        document.getElementById('res-severity').innerText = data.severity;
+        document.getElementById('res-recommendation').innerText = data.recommendation;
+        
+        emptyState.style.display = 'none';
+        resultCard.style.display = 'flex';
+
+    } catch (error) {
+        alert('Error: ' + error.message);
+    } finally {
+        btnAnalyze.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Analisis Sariawan';
+        btnAnalyze.removeAttribute('disabled');
+    }
+});});
