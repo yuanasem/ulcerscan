@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // === Tab navigation ===
+    // Navigasi Tab
     const tabBtns = document.querySelectorAll('.tab-btn');
     const tabContents = document.querySelectorAll('.tab-content');
 
@@ -12,110 +12,93 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // === Upload image logic ===
-    const dropZone = document.getElementById('drop-zone');
+    // Variabel Elemen
     const fileInput = document.getElementById('file-input');
-    const uploadPrompt = document.getElementById('upload-prompt');
+    const dropZone = document.getElementById('drop-zone');
+    const btnAnalyze = document.getElementById('btn-analyze');
     const previewContainer = document.getElementById('preview-container');
     const imagePreview = document.getElementById('image-preview');
-    const btnAnalyze = document.getElementById('btn-analyze');
-    const emptyState = document.getElementById('empty-state');
+    const uploadPrompt = document.getElementById('upload-prompt');
     const resultCard = document.getElementById('result-card');
+    const emptyState = document.getElementById('empty-state');
 
+    let selectedFile = null;
+
+    // Trigger Upload
     dropZone.addEventListener('click', () => fileInput.click());
 
+    fileInput.addEventListener('change', e => {
+        if (e.target.files.length > 0) handleFile(e.target.files[0]);
+    });
+
+    // Drag & Drop
     dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('dragover'); });
     dropZone.addEventListener('dragleave', () => dropZone.classList.remove('dragover'));
     dropZone.addEventListener('drop', e => {
         e.preventDefault();
         dropZone.classList.remove('dragover');
-        if (e.dataTransfer.files.length > 0) handleFileSelection(e.dataTransfer.files[0]);
+        if (e.dataTransfer.files.length > 0) handleFile(e.dataTransfer.files[0]);
     });
 
-    fileInput.addEventListener('change', e => {
-        if (e.target.files.length > 0) handleFileSelection(e.target.files[0]);
-    });
-
-    function handleFileSelection(file) {
-        if (!file.type.match('image.*')) { alert('Mohon unggah file gambar'); return; }
-
+    function handleFile(file) {
+        if (!file.type.startsWith('image/')) {
+            alert('Harap masukkan file gambar (JPG/PNG)');
+            return;
+        }
+        selectedFile = file;
         const reader = new FileReader();
         reader.onload = e => {
             imagePreview.src = e.target.result;
             uploadPrompt.style.display = 'none';
             previewContainer.style.display = 'block';
             btnAnalyze.removeAttribute('disabled');
-            
-            // Reset state hasil
-            emptyState.style.display = 'flex';
+            // Reset UI Hasil
             resultCard.style.display = 'none';
+            emptyState.style.display = 'flex';
         };
         reader.readAsDataURL(file);
     }
 
-    // === INTEGRASI MACHINE LEARNING (Fetch API ke Flask) ===
+    // Koneksi ke Backend Production
     btnAnalyze.addEventListener('click', async () => {
-        const file = fileInput.files[0];
-        if (!file) return;
+        if (!selectedFile) return;
 
-        // 1. Ubah tampilan tombol jadi loading
-        const originalHtml = btnAnalyze.innerHTML;
-        btnAnalyze.innerHTML = '<i class="fa-solid fa-spinner spin"></i> Menganalisis Gambar...';
-        btnAnalyze.setAttribute('disabled', 'true');
+        // UI Loading State
+        const originalBtnText = btnAnalyze.innerHTML;
+        btnAnalyze.innerHTML = '<i class="fa-solid fa-circle-notch spin"></i> Menganalisis...';
+        btnAnalyze.disabled = true;
 
-        // Sembunyikan hasil lama
-        emptyState.style.display = 'none';
-        resultCard.style.display = 'none';
-
-        // 2. Siapkan data gambar untuk dikirim
         const formData = new FormData();
-        formData.append('image', file);
+        formData.append('file', selectedFile);
 
         try {
-            // 3. Tembak ke endpoint /api/predict di Flask
-            const response = await fetch('http://127.0.0.1:5000/api/predict', {
+            // Ganti URL sesuai endpoint backend production kamu
+            const response = await fetch('/api/predict', {
                 method: 'POST',
                 body: formData
             });
 
-            if (!response.ok) {
-                throw new Error(`Server error: ${response.status}`);
-            }
+            if (!response.ok) throw new Error('Gagal menghubungi server');
 
             const data = await response.json();
 
-            // 4. Masukkan data balasan dari Flask ke dalam HTML
-            document.getElementById('res-type').innerText = data.predicted_class;
-            document.getElementById('res-severity').innerText = data.severity;
-            
-            // Mengubah array rekomendasi menjadi list HTML
-            let rekomendasiHtml = '<ul style="margin:0; padding-left:20px;">';
-            data.recommendations.forEach(item => {
-                rekomendasiHtml += `<li>${item}</li>`;
-            });
-            rekomendasiHtml += '</ul>';
-            
-            // Tambahkan peringatan jika butuh ke dokter
-            if (data.need_doctor) {
-                rekomendasiHtml += '<p style="color: #dc2626; font-weight: bold; margin-top: 10px;"><i class="fa-solid fa-triangle-exclamation"></i> Segera jadwalkan kunjungan ke dokter.</p>';
-            }
-            
-            document.getElementById('res-recommendation').innerHTML = rekomendasiHtml;
-            
-            // Update Akurasi
-            document.querySelector('.badge-success').innerText = `${data.confidence}% Akurat`;
+            // Mapping Data dari API ke UI Terbaru
+            document.getElementById('res-type').textContent = data.class_name || 'Tidak Terdeteksi';
+            document.getElementById('res-severity').textContent = data.severity || 'Normal';
+            document.getElementById('res-confidence').textContent = `${(data.confidence * 100).toFixed(1)}% Akurat`;
+            document.getElementById('res-recommendation').textContent = data.recommendation || 'Tetap jaga kebersihan mulut.';
+            document.getElementById('res-date').textContent = new Date().toLocaleTimeString();
 
-            // Tampilkan kartu hasil
-            resultCard.style.display = 'flex';
+            // Tampilkan Hasil
+            emptyState.style.display = 'none';
+            resultCard.style.display = 'block';
 
         } catch (error) {
-            console.error("Error:", error);
-            alert("Gagal menyambung ke server AI. Pastikan file app.py sudah di-run di terminal!");
-            emptyState.style.display = 'flex'; // Munculkan kembali empty state jika gagal
+            console.error(error);
+            alert('Terjadi kesalahan saat analisis: ' + error.message);
         } finally {
-            // 5. Kembalikan tombol ke kondisi semula
-            btnAnalyze.innerHTML = originalHtml;
-            btnAnalyze.removeAttribute('disabled');
+            btnAnalyze.innerHTML = originalBtnText;
+            btnAnalyze.disabled = false;
         }
     });
 });

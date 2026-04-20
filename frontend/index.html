@@ -4,15 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DentaScreen - Skrining Ulcer Oral</title>
-
-    <!-- FontAwesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Header -->
     <header>
         <div class="header-container">
             <div class="logo-icon"><i class="fa-solid fa-tooth"></i></div>
@@ -23,9 +18,12 @@
         </div>
     </header>
 
-    <!-- Main Content -->
     <main>
-        <!-- Navigation Tabs -->
+        <section class="hero-strip">
+            <div class="hero-pill"><i class="fa-solid fa-heart-pulse"></i> Desain Klinis & Responsif</div>
+            <div class="hero-pill"><i class="fa-solid fa-shield-heart"></i> Terintegrasi AI Production</div>
+        </section>
+
         <nav class="tabs-nav">
             <button class="tab-btn active" data-target="tab-skrining">
                 <i class="fa-solid fa-microscope"></i> Skrining
@@ -38,22 +36,20 @@
             </button>
         </nav>
 
-        <!-- TAB: SKRINING -->
         <section id="tab-skrining" class="tab-content active">
             <div class="grid-2">
-                <!-- Upload Panel -->
                 <div class="card">
                     <div class="card-header">
                         <h2 class="card-title"><i class="fa-regular fa-image"></i> Upload Gambar</h2>
-                        <p class="card-desc">Unggah atau tarik gambar sariawan untuk dianalisis.</p>
+                        <p class="card-desc">Unggah foto sariawan untuk dianalisis oleh AI.</p>
                     </div>
                     <div class="card-body">
                         <div class="upload-area" id="drop-zone">
                             <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp">
                             <div id="upload-prompt">
                                 <i class="fa-solid fa-cloud-arrow-up"></i>
-                                <h3>Klik atau Tarik Gambar Kesini</h3>
-                                <p>Mendukung format JPG, PNG, atau WEBP</p>
+                                <h3>Klik atau Tarik Gambar</h3>
+                                <p>JPG, PNG, atau WEBP</p>
                             </div>
                             <div class="image-preview-container" id="preview-container">
                                 <img id="image-preview" src="" alt="Preview">
@@ -62,40 +58,39 @@
                     </div>
                     <div class="card-footer">
                         <button class="btn btn-primary" id="btn-analyze" disabled>
-                            <i class="fa-solid fa-wand-magic-sparkles"></i> Analisis Sariawan
+                            <i class="fa-solid fa-wand-magic-sparkles"></i> Mulai Analisis
                         </button>
                     </div>
                 </div>
 
-                <!-- Result Panel -->
                 <div class="result-container">
                     <div class="empty-state" id="empty-state">
                         <i class="fa-solid fa-stethoscope"></i>
-                        <p>Hasil analisis akan muncul di sini setelah Anda mengunggah gambar dan menekan tombol Analisis.</p>
+                        <p>Hasil analisis akan muncul di sini.</p>
                     </div>
 
-                    <div class="card" id="result-card">
+                    <div class="card" id="result-card" style="display: none;">
                         <div class="card-header">
                             <div>
                                 <h2 class="card-title">Hasil Analisis</h2>
-                                <p class="card-desc">Berdasarkan deteksi citra (Simulasi)</p>
+                                <p class="card-desc" id="res-date">Baru saja</p>
                             </div>
-                            <span class="badge badge-success">94.2% Akurat</span>
+                            <span class="badge badge-success" id="res-confidence">0% Akurat</span>
                         </div>
                         <div class="card-body">
                             <div class="result-grid">
                                 <div class="result-box">
                                     <label><i class="fa-solid fa-virus"></i> Jenis Ulcer</label>
-                                    <div class="value" id="res-type">Sariawan Minor</div>
+                                    <div class="value" id="res-type">-</div>
                                 </div>
                                 <div class="result-box">
                                     <label><i class="fa-solid fa-triangle-exclamation"></i> Keparahan</label>
-                                    <div class="value" id="res-severity">Sedang</div>
+                                    <div class="value" id="res-severity">-</div>
                                 </div>
                             </div>
                             <div class="recommendation-box">
-                                <h4><i class="fa-solid fa-prescription-bottle-medical"></i> Rekomendasi Penanganan</h4>
-                                <p id="res-recommendation">Gunakan obat kumur antiseptik 2x sehari dan hindari makanan pedas/asam. Konsultasikan ke dokter jika tidak membaik.</p>
+                                <h4><i class="fa-solid fa-prescription-bottle-medical"></i> Rekomendasi</h4>
+                                <p id="res-recommendation">-</p>
                             </div>
                         </div>
                     </div>
@@ -103,18 +98,22 @@
             </div>
         </section>
 
-        <!-- TAB: EDUKASI -->
         <section id="tab-edukasi" class="tab-content">
-            <!-- Edukasi content (sama seperti file asli) -->
+            <div class="card">
+                <div class="card-body">
+                    <h3>Mengenal Ulcer Oral</h3>
+                    <p>Ulcer oral atau sariawan bisa disebabkan oleh berbagai faktor mulai dari trauma mekanik hingga kondisi sistemik.</p>
+                </div>
+            </div>
         </section>
 
-        <!-- TAB: RIWAYAT -->
         <section id="tab-riwayat" class="tab-content">
-            <!-- Riwayat content (sama seperti file asli) -->
+            <div class="empty-state">
+                <i class="fa-solid fa-folder-open"></i>
+                <p>Belum ada riwayat analisis tersimpan.</p>
+            </div>
         </section>
     </main>
-
-    <!-- JS -->
     <script src="script.js"></script>
 </body>
 </html>
