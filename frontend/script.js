@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         try {
             // Ganti URL sesuai endpoint backend production kamu
-            const response = await fetch('/api/predict', {
+            const response = await fetch('https://ulcerscan-production.up.railway.app', {
                 method: 'POST',
                 body: formData
             });
