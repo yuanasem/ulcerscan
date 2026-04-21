@@ -5,10 +5,21 @@ document.addEventListener('DOMContentLoaded', () => {
 
     tabBtns.forEach(btn => {
         btn.addEventListener('click', () => {
+            // Hapus kelas active dari semua tombol dan semua konten
             tabBtns.forEach(b => b.classList.remove('active'));
             tabContents.forEach(c => c.classList.remove('active'));
+            
+            // Tambahkan kelas active ke tombol yang diklik
             btn.classList.add('active');
-            document.getElementById(btn.getAttribute('data-target')).classList.add('active');
+            
+            // Ambil target ID dari data-target (misal: tab-edukasi)
+            const targetId = btn.getAttribute('data-target');
+            const targetContent = document.getElementById(targetId);
+            
+            // Tampilkan konten yang sesuai
+            if (targetContent) {
+                targetContent.classList.add('active');
+            }
         });
     });
 

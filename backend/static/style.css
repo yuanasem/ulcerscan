@@ -146,3 +146,90 @@ main {
 @media (max-width: 768px) {
     .grid-2 { grid-template-columns: 1fr; }
 }
+
+/* Pengaturan Visibilitas Tab */
+.tab-content {
+    display: none; /* Sembunyikan semua tab secara default */
+    animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+    display: block; /* Hanya tampilkan tab yang aktif */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Gaya Tab Edukasi */
+.edu-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.edu-list {
+    list-style: none;
+    padding: 0;
+}
+
+.edu-list li {
+    margin-bottom: 1rem;
+    padding-left: 1.5rem;
+    position: relative;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
+.edu-list li::before {
+    content: "➜";
+    position: absolute;
+    left: 0;
+    color: var(--primary-blue);
+    font-weight: bold;
+}
+
+.wide-card {
+    grid-column: span 2;
+}
+
+.info-alert {
+    display: flex;
+    gap: 1rem;
+    background: #eef6ff;
+    padding: 1.5rem;
+    border-radius: 15px;
+    border-left: 5px solid var(--primary-blue);
+}
+
+.info-alert i { font-size: 1.5rem; color: var(--primary-blue); }
+.info-alert h4 { margin: 0 0 0.5rem; }
+
+/* Gaya Tab Riwayat (Coming Soon) */
+.coming-soon {
+    text-align: center;
+    padding: 5rem 2rem;
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+}
+
+.cs-icon {
+    font-size: 4rem;
+    color: #ffd6e7;
+    margin-bottom: 1.5rem;
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
+/* Responsif untuk Mobile */
+@media (max-width: 768px) {
+    .edu-grid { grid-template-columns: 1fr; }
+    .wide-card { grid-column: span 1; }
+}
