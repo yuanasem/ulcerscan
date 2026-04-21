@@ -63,6 +63,7 @@ main {
     box-shadow: 0 4px 12px rgba(0,0,0,0.05);
 }
 
+/* NAVIGASI TABS */
 .tabs-nav {
     display: flex;
     background: white;
@@ -83,6 +84,11 @@ main {
     font-weight: 600;
     color: var(--text-soft);
     transition: 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 1rem;
 }
 
 .tab-btn.active {
@@ -90,6 +96,28 @@ main {
     color: white;
 }
 
+/* CONTAINER TAB KONTEN */
+.tab-container {
+    width: 100%;
+    min-height: 400px;
+}
+
+.tab-content {
+    display: none;
+    width: 100%;
+    animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+    display: block; 
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* KONTEN SKRINING */
 .grid-2 {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -104,6 +132,8 @@ main {
 }
 
 .card-header { padding: 1.5rem; border-bottom: 1px solid #eee; }
+.card-title { margin: 0; font-size: 1.2rem; }
+.card-desc { margin: 0.5rem 0 0; color: var(--text-soft); font-size: 0.9rem; }
 .card-body { padding: 1.5rem; }
 .card-footer { padding: 1rem; background: #fafafa; }
 
@@ -113,9 +143,14 @@ main {
     padding: 3rem 1rem;
     text-align: center;
     cursor: pointer;
+    transition: 0.3s;
 }
 
 .upload-area.dragover { border-color: var(--deep-pink); background: #fff0f5; }
+
+.upload-area i { font-size: 3rem; color: var(--primary-blue); margin-bottom: 1rem; }
+.upload-area h3 { margin: 0 0 0.5rem; }
+.upload-area p { margin: 0; color: var(--text-soft); }
 
 #image-preview { width: 100%; border-radius: 15px; }
 
@@ -128,41 +163,52 @@ main {
     color: white;
     font-weight: bold;
     cursor: pointer;
+    font-size: 1rem;
+    transition: 0.3s;
 }
 
-.btn-primary:disabled { opacity: 0.5; }
+.btn-primary:hover:not(:disabled) { background: #d0467b; }
+.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
+
+.empty-state {
+    text-align: center;
+    padding: 3rem;
+    color: var(--text-soft);
+    background: white;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.empty-state i { font-size: 3rem; color: #ccddee; margin-bottom: 1rem; }
+
+.result-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
 
 .result-box {
     background: #f0f7ff;
     padding: 1rem;
     border-radius: 15px;
-    margin-bottom: 1rem;
 }
 
-.badge-success { background: #e6f4ea; color: #1e8e3e; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; }
+.result-box label { display: block; color: var(--text-soft); font-size: 0.85rem; margin-bottom: 0.5rem; }
+.result-box .value { font-weight: bold; font-size: 1.1rem; }
 
+.recommendation-box h4 { margin: 0 0 0.5rem; color: var(--deep-pink); }
+.recommendation-box p { margin: 0; line-height: 1.5; font-size: 0.95rem; }
+
+.badge-success { background: #e6f4ea; color: #1e8e3e; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold;}
 .spin { animation: fa-spin 1s infinite linear; }
 
-@media (max-width: 768px) {
-    .grid-2 { grid-template-columns: 1fr; }
-}
-
-/* Pengaturan Visibilitas Tab */
-.tab-content {
-    display: none; /* Sembunyikan semua tab secara default */
-    animation: fadeIn 0.4s ease;
-}
-
-.tab-content.active {
-    display: block; /* Hanya tampilkan tab yang aktif */
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* Gaya Tab Edukasi */
+/* KONTEN EDUKASI */
 .edu-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -206,7 +252,7 @@ main {
 .info-alert i { font-size: 1.5rem; color: var(--primary-blue); }
 .info-alert h4 { margin: 0 0 0.5rem; }
 
-/* Gaya Tab Riwayat (Coming Soon) */
+/* KONTEN RIWAYAT (Coming Soon) */
 .coming-soon {
     text-align: center;
     padding: 5rem 2rem;
@@ -230,6 +276,6 @@ main {
 
 /* Responsif untuk Mobile */
 @media (max-width: 768px) {
-    .edu-grid { grid-template-columns: 1fr; }
+    .grid-2, .edu-grid { grid-template-columns: 1fr; }
     .wide-card { grid-column: span 1; }
 }

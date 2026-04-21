@@ -72,45 +72,45 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Koneksi ke Backend Production (update URL sesuai dengan deployment)
 btnAnalyze.addEventListener('click', async () => {
-    const formData = new FormData();
-    const file = selectedFile; // Pastikan file yang dipilih sudah disimpan di variabel selectedFile
-    
-    // PERUBAHAN 1: Pakai 'image' sesuai request.files['image'] di Python
-    formData.append('image', file); 
-
-    btnAnalyze.innerHTML = '<i class="fa-solid fa-spinner spin"></i> Menganalisis...';
-    btnAnalyze.setAttribute('disabled', 'true');
-
-    try {
-        // PERUBAHAN 2: Sesuaikan path URL dengan /api/predict
-        const response = await fetch('https://ulcerscan-production.up.railway.app/api/predict', {
-            method: 'POST',
-            body: formData
-        });
-
-        if (!response.ok) {
-            const errorData = await response.json();
-            throw new Error(errorData.error || 'Gagal menganalisis');
-        }
-
-        const data = await response.json();
-
-        // Update UI dengan hasil dari server
-        document.getElementById('res-type').innerText = data.type;
-        document.getElementById('res-severity').innerText = data.severity;
-        document.getElementById('res-recommendation').innerText = data.recommendation;
-        // Tambahkan ini di bawah update res-recommendation
-        if (data.confidence) {
-            document.getElementById('res-confidence').innerText = data.confidence + '% Akurat';
-}
+        const formData = new FormData();
+        const file = selectedFile; 
         
-        emptyState.style.display = 'none';
-        resultCard.style.display = 'flex';
+        formData.append('image', file); 
 
-    } catch (error) {
-        alert('Error: ' + error.message);
-    } finally {
-        btnAnalyze.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Analisis Sariawan';
-        btnAnalyze.removeAttribute('disabled');
-    }
-});});
+        btnAnalyze.innerHTML = '<i class="fa-solid fa-spinner spin"></i> Menganalisis...';
+        btnAnalyze.setAttribute('disabled', 'true');
+
+        try {
+            // PERUBAHAN: Gunakan path relatif karena frontend dan backend sudah menyatu
+            const response = await fetch('/api/predict', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.error || 'Gagal menganalisis');
+            }
+
+            const data = await response.json();
+
+            // Update UI dengan hasil dari server
+            document.getElementById('res-type').innerText = data.type;
+            document.getElementById('res-severity').innerText = data.severity;
+            document.getElementById('res-recommendation').innerText = data.recommendation;
+            
+            if (data.confidence) {
+                document.getElementById('res-confidence').innerText = data.confidence + '% Akurat';
+            }
+            
+            emptyState.style.display = 'none';
+            resultCard.style.display = 'flex';
+
+        } catch (error) {
+            alert('Error: ' + error.message);
+        } finally {
+            btnAnalyze.innerHTML = '<i class="fa-solid fa-wand-magic-sparkles"></i> Analisis Sariawan';
+            btnAnalyze.removeAttribute('disabled');
+        }
+    });
+}); // Penutup event listener DOMContentLoaded yang rapi

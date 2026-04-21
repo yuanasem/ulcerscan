@@ -29,141 +29,133 @@
                 <i class="fa-solid fa-microscope"></i> Skrining
             </button>
             <button class="tab-btn" data-target="tab-edukasi">
-                <section id="tab-edukasi" class="tab-content">
-                    <div class="edu-grid">
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title"><i class="fa-solid fa-tooth"></i> Merawat Kesehatan Mulut</h3>
-                            </div>
-                            <div class="card-body">
-                                <ul class="edu-list">
-                                    <li><strong>Sikat Gigi 2x Sehari:</strong> Pagi setelah sarapan dan malam sebelum tidur.</li>
-                                    <li><strong>Bersihkan Lidah:</strong> Gunakan pembersih lidah untuk menghilangkan bakteri penyebab bau mulut.</li>
-                                    <li><strong>Flossing:</strong> Gunakan benang gigi untuk membersihkan sisa makanan di sela gigi yang tidak terjangkau sikat.</li>
-                                    <li><strong>Ganti Sikat Gigi:</strong> Lakukan setiap 3-4 bulan sekali atau jika bulu sikat sudah mekar.</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="card">
-                            <div class="card-header">
-                                <h3 class="card-title"><i class="fa-solid fa-shield-virus"></i> Pencegahan Sariawan</h3>
-                            </div>
-                            <div class="card-body">
-                                <ul class="edu-list">
-                                    <li><strong>Cukupi Nutrisi:</strong> Konsumsi makanan kaya Vitamin C, B12, dan Zinc (sayuran hijau, jeruk, telur).</li>
-                                    <li><strong>Hidrasi:</strong> Minum air putih minimal 2 liter sehari untuk menjaga kelembapan mukosa mulut.</li>
-                                    <li><strong>Kelola Stres:</strong> Stres tinggi dapat memicu munculnya sariawan rekuren (kambuhan).</li>
-                                    <li><strong>Hindari Pemicu:</strong> Kurangi makanan terlalu pedas, asam, atau keras yang dapat melukai gusi.</li>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <div class="card wide-card">
-                            <div class="card-body">
-                                <div class="info-alert">
-                                    <i class="fa-solid fa-circle-info"></i>
-                                    <div>
-                                        <h4>Kapan harus ke dokter gigi?</h4>
-                                        <p>Jika sariawan tidak kunjung sembuh lebih dari 2 minggu, bertambah luas secara cepat, atau disertai demam tinggi.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </section>
+                <i class="fa-solid fa-book-medical"></i> Edukasi
             </button>
             <button class="tab-btn" data-target="tab-riwayat">
-                <section id="tab-riwayat" class="tab-content">
-                    <div class="coming-soon">
-                        <div class="cs-icon">
-                            <i class="fa-solid fa-hourglass-half"></i>
-                        </div>
-                        <h2>Coming Soon!</h2>
-                        <p>Fitur riwayat sedang dalam tahap pengembangan. Nantinya Anda dapat menyimpan dan melihat kembali hasil skrining Anda untuk memantau proses penyembuhan.</p>
-                    </div>
-                </section>
+                <i class="fa-solid fa-clock-rotate-left"></i> Riwayat
             </button>
         </nav>
 
-        <section id="tab-skrining" class="tab-content active">
-            <div class="grid-2">
-                <div class="card">
-                    <div class="card-header">
-                        <h2 class="card-title"><i class="fa-regular fa-image"></i> Upload Gambar</h2>
-                        <p class="card-desc">Unggah foto sariawan untuk dianalisis oleh AI.</p>
-                    </div>
-                    <div class="card-body">
-                        <div class="upload-area" id="drop-zone">
-                            <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp">
-                            <div id="upload-prompt">
-                                <i class="fa-solid fa-cloud-arrow-up"></i>
-                                <h3>Klik atau Tarik Gambar</h3>
-                                <p>JPG, PNG, atau WEBP</p>
-                            </div>
-                            <div class="image-preview-container" id="preview-container">
-                                <img id="image-preview" src="" alt="Preview">
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-footer">
-                        <button class="btn btn-primary" id="btn-analyze" disabled>
-                            <i class="fa-solid fa-wand-magic-sparkles"></i> Mulai Analisis
-                        </button>
-                    </div>
-                </div>
-
-                <div class="result-container">
-                    <div class="empty-state" id="empty-state">
-                        <i class="fa-solid fa-stethoscope"></i>
-                        <p>Hasil analisis akan muncul di sini.</p>
-                    </div>
-
-                    <div class="card" id="result-card" style="display: none;">
+        <div class="tab-container">
+            
+            <section id="tab-skrining" class="tab-content active">
+                <div class="grid-2">
+                    <div class="card">
                         <div class="card-header">
-                            <div>
-                                <h2 class="card-title">Hasil Analisis</h2>
-                                <p class="card-desc" id="res-date">Baru saja</p>
-                            </div>
-                            <span class="badge badge-success" id="res-confidence">0% Akurat</span>
+                            <h2 class="card-title"><i class="fa-regular fa-image"></i> Upload Gambar</h2>
+                            <p class="card-desc">Unggah foto sariawan untuk dianalisis oleh AI.</p>
                         </div>
                         <div class="card-body">
-                            <div class="result-grid">
-                                <div class="result-box">
-                                    <label><i class="fa-solid fa-virus"></i> Jenis Ulcer</label>
-                                    <div class="value" id="res-type">-</div>
+                            <div class="upload-area" id="drop-zone">
+                                <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp" style="display: none;">
+                                <div id="upload-prompt">
+                                    <i class="fa-solid fa-cloud-arrow-up"></i>
+                                    <h3>Klik atau Tarik Gambar</h3>
+                                    <p>JPG, PNG, atau WEBP</p>
                                 </div>
-                                <div class="result-box">
-                                    <label><i class="fa-solid fa-triangle-exclamation"></i> Keparahan</label>
-                                    <div class="value" id="res-severity">-</div>
+                                <div class="image-preview-container" id="preview-container" style="display: none;">
+                                    <img id="image-preview" src="" alt="Preview">
                                 </div>
                             </div>
-                            <div class="recommendation-box">
-                                <h4><i class="fa-solid fa-prescription-bottle-medical"></i> Rekomendasi</h4>
-                                <p id="res-recommendation">-</p>
+                        </div>
+                        <div class="card-footer">
+                            <button class="btn btn-primary" id="btn-analyze" disabled>
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> Mulai Analisis
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="result-container">
+                        <div class="empty-state" id="empty-state">
+                            <i class="fa-solid fa-stethoscope"></i>
+                            <p>Hasil analisis akan muncul di sini.</p>
+                        </div>
+
+                        <div class="card" id="result-card" style="display: none;">
+                            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
+                                <div>
+                                    <h2 class="card-title">Hasil Analisis</h2>
+                                    <p class="card-desc" id="res-date">Baru saja</p>
+                                </div>
+                                <span class="badge badge-success" id="res-confidence">0% Akurat</span>
+                            </div>
+                            <div class="card-body">
+                                <div class="result-grid">
+                                    <div class="result-box">
+                                        <label><i class="fa-solid fa-virus"></i> Jenis Ulcer</label>
+                                        <div class="value" id="res-type">-</div>
+                                    </div>
+                                    <div class="result-box">
+                                        <label><i class="fa-solid fa-triangle-exclamation"></i> Keparahan</label>
+                                        <div class="value" id="res-severity">-</div>
+                                    </div>
+                                </div>
+                                <div class="recommendation-box">
+                                    <h4><i class="fa-solid fa-prescription-bottle-medical"></i> Rekomendasi</h4>
+                                    <p id="res-recommendation">-</p>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="tab-edukasi" class="tab-content">
-            <div class="card">
-                <div class="card-body">
-                    <h3>Mengenal Ulcer Oral</h3>
-                    <p>Ulcer oral atau sariawan bisa disebabkan oleh berbagai faktor mulai dari trauma mekanik hingga kondisi sistemik.</p>
+            <section id="tab-edukasi" class="tab-content">
+                <div class="edu-grid">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title"><i class="fa-solid fa-tooth"></i> Merawat Kesehatan Mulut</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="edu-list">
+                                <li><strong>Sikat Gigi 2x Sehari:</strong> Pagi setelah sarapan dan malam sebelum tidur.</li>
+                                <li><strong>Bersihkan Lidah:</strong> Gunakan pembersih lidah untuk menghilangkan bakteri penyebab bau mulut.</li>
+                                <li><strong>Flossing:</strong> Gunakan benang gigi untuk membersihkan sisa makanan di sela gigi yang tidak terjangkau sikat.</li>
+                                <li><strong>Ganti Sikat Gigi:</strong> Lakukan setiap 3-4 bulan sekali atau jika bulu sikat sudah mekar.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title"><i class="fa-solid fa-shield-virus"></i> Pencegahan Sariawan</h3>
+                        </div>
+                        <div class="card-body">
+                            <ul class="edu-list">
+                                <li><strong>Cukupi Nutrisi:</strong> Konsumsi makanan kaya Vitamin C, B12, dan Zinc (sayuran hijau, jeruk, telur).</li>
+                                <li><strong>Hidrasi:</strong> Minum air putih minimal 2 liter sehari untuk menjaga kelembapan mukosa mulut.</li>
+                                <li><strong>Kelola Stres:</strong> Stres tinggi dapat memicu munculnya sariawan rekuren (kambuhan).</li>
+                                <li><strong>Hindari Pemicu:</strong> Kurangi makanan terlalu pedas, asam, atau keras yang dapat melukai gusi.</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="card wide-card">
+                        <div class="card-body">
+                            <div class="info-alert">
+                                <i class="fa-solid fa-circle-info"></i>
+                                <div>
+                                    <h4>Kapan harus ke dokter gigi?</h4>
+                                    <p>Jika sariawan tidak kunjung sembuh lebih dari 2 minggu, bertambah luas secara cepat, atau disertai demam tinggi.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </section>
+            </section>
 
-        <section id="tab-riwayat" class="tab-content">
-            <div class="empty-state">
-                <i class="fa-solid fa-folder-open"></i>
-                <p>Belum ada riwayat analisis tersimpan.</p>
-            </div>
-        </section>
-    </main>
+            <section id="tab-riwayat" class="tab-content">
+                <div class="coming-soon">
+                    <div class="cs-icon">
+                        <i class="fa-solid fa-hourglass-half"></i>
+                    </div>
+                    <h2>Coming Soon!</h2>
+                    <p>Fitur riwayat sedang dalam tahap pengembangan. Nantinya Anda dapat menyimpan dan melihat kembali hasil skrining Anda untuk memantau proses penyembuhan.</p>
+                </div>
+            </section>
+
+        </div> </main>
+    
     <script src="script.js"></script>
 </body>
 </html>
