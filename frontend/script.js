@@ -62,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Koneksi ke Backend Production (update URL sesuai dengan deployment)
 btnAnalyze.addEventListener('click', async () => {
     const formData = new FormData();
-    const file = fileInput.files[0];
+    const file = selectedFile; // Pastikan file yang dipilih sudah disimpan di variabel selectedFile
     
     // PERUBAHAN 1: Pakai 'image' sesuai request.files['image'] di Python
     formData.append('image', file); 
@@ -88,6 +88,10 @@ btnAnalyze.addEventListener('click', async () => {
         document.getElementById('res-type').innerText = data.type;
         document.getElementById('res-severity').innerText = data.severity;
         document.getElementById('res-recommendation').innerText = data.recommendation;
+        // Tambahkan ini di bawah update res-recommendation
+        if (data.confidence) {
+            document.getElementById('res-confidence').innerText = data.confidence + '% Akurat';
+}
         
         emptyState.style.display = 'none';
         resultCard.style.display = 'flex';
