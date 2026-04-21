@@ -10,11 +10,10 @@
 }
 
 * { box-sizing: border-box; }
-
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Segoe UI', sans-serif;
     margin: 0;
-    background: radial-gradient(circle at top left, rgba(244, 143, 177, 0.1), transparent 30%), #f7fbff;
+    background: radial-gradient(circle at top left, rgba(244, 143, 177, 0.1), transparent 30%), var(--bg);
     color: var(--text);
 }
 
@@ -25,257 +24,65 @@ header {
     text-align: center;
 }
 
-.header-container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-}
+.header-container { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+.logo-icon { font-size: 2rem; background: rgba(255,255,255,0.2); padding: 1rem; border-radius: 20px; }
 
-.logo-icon {
-    font-size: 2rem;
-    background: rgba(255,255,255,0.2);
-    padding: 1rem;
-    border-radius: 20px;
-    backdrop-filter: blur(5px);
-}
+main { max-width: 1100px; margin: -3rem auto 2rem; padding: 0 1rem; }
+.hero-strip { display: flex; gap: 0.5rem; margin-bottom: 1rem; justify-content: center; }
+.hero-pill { background: white; padding: 0.6rem 1rem; border-radius: 50px; font-size: 0.85rem; box-shadow: 0 4px 12px rgba(0,0,0,0.05); }
 
-main {
-    max-width: 1100px;
-    margin: -3rem auto 2rem;
-    padding: 0 1rem;
-}
+/* TAB SYSTEM */
+.tabs-nav { display: flex; background: white; padding: 0.5rem; border-radius: 50px; gap: 0.5rem; margin-bottom: 2rem; box-shadow: var(--shadow); }
+.tab-btn { flex: 1; border: none; background: none; padding: 0.8rem; border-radius: 50px; cursor: pointer; font-weight: 600; color: var(--text-soft); transition: 0.3s; display: flex; align-items: center; justify-content: center; gap: 0.5rem; }
+.tab-btn.active { background: var(--primary-blue); color: white; }
 
-.hero-strip {
-    display: flex;
-    gap: 0.5rem;
+.tab-content { display: none; animation: fadeIn 0.4s ease; }
+.tab-content.active { display: block; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+
+/* BERANDA STYLE */
+.hero-section { text-align: center; padding: 3rem 1rem; }
+.info-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 1.5rem; }
+.creator-section { margin-top: 4rem; text-align: center; }
+.creator-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+.creator-card { background: white; border-radius: 20px; padding: 1.5rem; box-shadow: var(--shadow); transition: 0.3s; }
+.creator-card img {
+    /* Langkah 1: Atur ukuran kotak yang sama (1:1) */
+    width: 150px;  /* Anda bisa ubah ke 200px jika perlu */
+    height: 150px; /* Wajib sama dengan width agar lingkaran sempurna */
+    
+    /* Langkah 2: Buat lingkaran sempurna */
+    border-radius: 50%; /* Nilai 50% memotong sudut kotak menjadi lingkaran */
+    
+    /* Langkah 3: Penting! Pertahankan rasio & potong (crop) */
+    object-fit: cover; /* Foto akan mengisi lingkaran tanpa distorsi/gepeng, kelebihannya dipotong */
+    
+    /* Tambahan Kerapihan */
     margin-bottom: 1rem;
-    justify-content: center;
+    border: 4px solid #f0f7ff; /* Frame tipis di sekeliling foto */
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1); /* Bayangan halus agar foto terlihat menonjol */
 }
 
-.hero-pill {
-    background: white;
-    padding: 0.6rem 1rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-}
-
-/* NAVIGASI TABS */
-.tabs-nav {
-    display: flex;
-    background: white;
-    padding: 0.5rem;
-    border-radius: 50px;
-    gap: 0.5rem;
-    margin-bottom: 2rem;
-    box-shadow: var(--shadow);
-}
-
-.tab-btn {
-    flex: 1;
-    border: none;
-    background: none;
-    padding: 0.8rem;
-    border-radius: 50px;
-    cursor: pointer;
-    font-weight: 600;
-    color: var(--text-soft);
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: 1rem;
-}
-
-.tab-btn.active {
-    background: var(--primary-blue);
-    color: white;
-}
-
-/* CONTAINER TAB KONTEN */
-.tab-container {
-    width: 100%;
-    min-height: 400px;
-}
-
-.tab-content {
-    display: none;
-    width: 100%;
-    animation: fadeIn 0.4s ease;
-}
-
-.tab-content.active {
-    display: block; 
-}
-
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(10px); }
-    to { opacity: 1; transform: translateY(0); }
-}
-
-/* KONTEN SKRINING */
-.grid-2 {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-}
-
-.card {
-    background: white;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow);
-    overflow: hidden;
-}
-
+/* SKRINING STYLE */
+.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+.card { background: white; border-radius: var(--radius-lg); box-shadow: var(--shadow); overflow: hidden; margin-bottom: 1rem; }
 .card-header { padding: 1.5rem; border-bottom: 1px solid #eee; }
-.card-title { margin: 0; font-size: 1.2rem; }
-.card-desc { margin: 0.5rem 0 0; color: var(--text-soft); font-size: 0.9rem; }
 .card-body { padding: 1.5rem; }
 .card-footer { padding: 1rem; background: #fafafa; }
 
-.upload-area {
-    border: 2px dashed #ccddee;
-    border-radius: var(--radius-md);
-    padding: 3rem 1rem;
-    text-align: center;
-    cursor: pointer;
-    transition: 0.3s;
-}
-
+.upload-area { border: 2px dashed #ccddee; border-radius: var(--radius-md); padding: 3rem 1rem; text-align: center; cursor: pointer; }
 .upload-area.dragover { border-color: var(--deep-pink); background: #fff0f5; }
-
-.upload-area i { font-size: 3rem; color: var(--primary-blue); margin-bottom: 1rem; }
-.upload-area h3 { margin: 0 0 0.5rem; }
-.upload-area p { margin: 0; color: var(--text-soft); }
-
 #image-preview { width: 100%; border-radius: 15px; }
 
-.btn-primary {
-    width: 100%;
-    padding: 1rem;
-    border: none;
-    border-radius: 15px;
-    background: var(--deep-pink);
-    color: white;
-    font-weight: bold;
-    cursor: pointer;
-    font-size: 1rem;
-    transition: 0.3s;
-}
+.btn-primary { width: 100%; padding: 1rem; border: none; border-radius: 15px; background: var(--deep-pink); color: white; font-weight: bold; cursor: pointer; }
+.btn-primary:disabled { opacity: 0.5; }
 
-.btn-primary:hover:not(:disabled) { background: #d0467b; }
-.btn-primary:disabled { opacity: 0.5; cursor: not-allowed; }
-
-.empty-state {
-    text-align: center;
-    padding: 3rem;
-    color: var(--text-soft);
-    background: white;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-}
-
-.empty-state i { font-size: 3rem; color: #ccddee; margin-bottom: 1rem; }
-
-.result-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.result-box {
-    background: #f0f7ff;
-    padding: 1rem;
-    border-radius: 15px;
-}
-
-.result-box label { display: block; color: var(--text-soft); font-size: 0.85rem; margin-bottom: 0.5rem; }
+.result-box { background: #f0f7ff; padding: 1rem; border-radius: 15px; margin-bottom: 1rem; }
+.result-box label { font-size: 0.8rem; color: var(--text-soft); }
 .result-box .value { font-weight: bold; font-size: 1.1rem; }
 
-.recommendation-box h4 { margin: 0 0 0.5rem; color: var(--deep-pink); }
-.recommendation-box p { margin: 0; line-height: 1.5; font-size: 0.95rem; }
+.coming-soon { text-align: center; padding: 5rem 2rem; }
+.cs-icon { font-size: 4rem; color: #ffd6e7; margin-bottom: 1rem; }
 
-.badge-success { background: #e6f4ea; color: #1e8e3e; padding: 0.4rem 0.8rem; border-radius: 20px; font-size: 0.8rem; font-weight: bold;}
-.spin { animation: fa-spin 1s infinite linear; }
-
-/* KONTEN EDUKASI */
-.edu-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1.5rem;
-}
-
-.edu-list {
-    list-style: none;
-    padding: 0;
-}
-
-.edu-list li {
-    margin-bottom: 1rem;
-    padding-left: 1.5rem;
-    position: relative;
-    font-size: 0.95rem;
-    line-height: 1.5;
-}
-
-.edu-list li::before {
-    content: "➜";
-    position: absolute;
-    left: 0;
-    color: var(--primary-blue);
-    font-weight: bold;
-}
-
-.wide-card {
-    grid-column: span 2;
-}
-
-.info-alert {
-    display: flex;
-    gap: 1rem;
-    background: #eef6ff;
-    padding: 1.5rem;
-    border-radius: 15px;
-    border-left: 5px solid var(--primary-blue);
-}
-
-.info-alert i { font-size: 1.5rem; color: var(--primary-blue); }
-.info-alert h4 { margin: 0 0 0.5rem; }
-
-/* KONTEN RIWAYAT (Coming Soon) */
-.coming-soon {
-    text-align: center;
-    padding: 5rem 2rem;
-    background: white;
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow);
-}
-
-.cs-icon {
-    font-size: 4rem;
-    color: #ffd6e7;
-    margin-bottom: 1.5rem;
-    animation: pulse 2s infinite;
-}
-
-@keyframes pulse {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
-}
-
-/* Responsif untuk Mobile */
-@media (max-width: 768px) {
-    .grid-2, .edu-grid { grid-template-columns: 1fr; }
-    .wide-card { grid-column: span 1; }
-}
+@media (max-width: 768px) { .grid-2, .info-grid, .creator-grid { grid-template-columns: 1fr; } }
