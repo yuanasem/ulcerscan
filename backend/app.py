@@ -94,7 +94,7 @@ def serve_static(path):
 # Tambahkan ini di bawah rute serve_static yang sudah ada
 @app.route('/photos/<path:path>')
 def serve_photos(path):
-    return send_from_directory('../photos', path)
+    return send_from_directory('photos', path)
 
 # ===== ENDPOINT: HEALTH CHECK =====
 @app.route('/api/health', methods=['GET'])
