@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DentaScreen - Skrining Ulcer Oral</title>
+    <title>DentaScreen - Deteksi Ulcer Oral Pintar</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="style.css">
 </head>
@@ -20,12 +20,15 @@
 
     <main>
         <section class="hero-strip">
-            <div class="hero-pill"><i class="fa-solid fa-heart-pulse"></i> Desain Klinis & Responsif</div>
-            <div class="hero-pill"><i class="fa-solid fa-shield-heart"></i> Terintegrasi AI Production</div>
+            <div class="hero-pill"><i class="fa-solid fa-heart-pulse"></i> Desain Klinis</div>
+            <div class="hero-pill"><i class="fa-solid fa-shield-heart"></i> Terintegrasi AI</div>
         </section>
 
         <nav class="tabs-nav">
-            <button class="tab-btn active" data-target="tab-skrining">
+            <button class="tab-btn active" data-target="tab-beranda">
+                <i class="fa-solid fa-house"></i> Beranda
+            </button>
+            <button class="tab-btn" data-target="tab-skrining">
                 <i class="fa-solid fa-microscope"></i> Skrining
             </button>
             <button class="tab-btn" data-target="tab-edukasi">
@@ -38,20 +41,82 @@
 
         <div class="tab-container">
             
-            <section id="tab-skrining" class="tab-content active">
+            <section id="tab-beranda" class="tab-content active">
+                <div class="home-container">
+                    <div class="hero-section">
+                        <h2>Kenali Sariawan Anda Lebih Dekat</h2>
+                        <p>DentaScreen membantu Anda mendeteksi jenis sariawan secara dini menggunakan teknologi kecerdasan buatan.</p>
+                    </div>
+
+                    <div class="card home-info">
+                        <div class="card-body">
+                            <h3>Apa itu Sariawan?</h3>
+                            <p>Sariawan (<em>Stomatitis Aftosa</em>) adalah luka kecil dangkal di dalam mulut yang bisa sangat perih. Meskipun sering dianggap sepele, sariawan tertentu bisa menjadi indikasi kondisi kesehatan yang lebih serius.</p>
+                            
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <h4><i class="fa-solid fa-clipboard-list"></i> Gejala Umum</h4>
+                                    <ul>
+                                        <li>Luka bulat berwarna putih atau kuning.</li>
+                                        <li>Pinggiran luka yang memerah dan meradang.</li>
+                                        <li>Rasa perih saat makan, bicara, atau menyikat gigi.</li>
+                                    </ul>
+                                </div>
+                                <div class="info-item">
+                                    <h4><i class="fa-solid fa-circle-exclamation"></i> Kapan Harus Waspada?</h4>
+                                    <p>Sariawan bisa menandakan masalah serius (seperti kanker mulut) jika:</p>
+                                    <ul>
+                                        <li>Tidak sembuh lebih dari 3 minggu.</li>
+                                        <li>Luka terus membesar atau muncul benjolan keras.</li>
+                                        <li>Disertai demam atau kesulitan menelan yang hebat.</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="creator-section">
+                        <h3 class="section-title">Creator DentaScreen</h3>
+                        <div class="creator-grid">
+                            <div class="creator-card">
+                                <img src="/photos/Hasina.jpeg" alt="Hasina">
+                                <div class="creator-info">
+                                    <h4>Mr. Hasina Bibi Husen</h4>
+                                    <p>Frontend Developer</p>
+                                </div>
+                            </div>
+                            <div class="creator-card">
+                                <img src="/photos/Kyoo.jpg" alt="Kyoo">
+                                <div class="creator-info">
+                                    <h4>Muhammad Nur Rohman</h4>
+                                    <p>Backend Developer + Prompter</p>
+                                </div>
+                            </div>
+                            <div class="creator-card">
+                                <img src="/photos/Nessa.jpeg" alt="Nessa">
+                                <div class="creator-info">
+                                    <h4>Innez Agnelia Aysa Putri Indraswari </h4>
+                                    <p>Frontend Developer</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tab-skrining" class="tab-content">
                 <div class="grid-2">
                     <div class="card">
                         <div class="card-header">
                             <h2 class="card-title"><i class="fa-regular fa-image"></i> Upload Gambar</h2>
-                            <p class="card-desc">Unggah foto sariawan untuk dianalisis oleh AI.</p>
                         </div>
                         <div class="card-body">
                             <div class="upload-area" id="drop-zone">
-                                <input type="file" id="file-input" accept="image/png, image/jpeg, image/webp" style="display: none;">
+                                <input type="file" id="file-input" accept="image/*" style="display: none;">
                                 <div id="upload-prompt">
                                     <i class="fa-solid fa-cloud-arrow-up"></i>
                                     <h3>Klik atau Tarik Gambar</h3>
-                                    <p>JPG, PNG, atau WEBP</p>
+                                    <p>Format: JPG, PNG, atau WEBP</p>
                                 </div>
                                 <div class="image-preview-container" id="preview-container" style="display: none;">
                                     <img id="image-preview" src="" alt="Preview">
@@ -70,28 +135,24 @@
                             <i class="fa-solid fa-stethoscope"></i>
                             <p>Hasil analisis akan muncul di sini.</p>
                         </div>
-
                         <div class="card" id="result-card" style="display: none;">
-                            <div class="card-header" style="display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <h2 class="card-title">Hasil Analisis</h2>
-                                    <p class="card-desc" id="res-date">Baru saja</p>
-                                </div>
+                            <div class="card-header" style="display: flex; justify-content: space-between;">
+                                <h2 class="card-title">Hasil Analisis</h2>
                                 <span class="badge badge-success" id="res-confidence">0% Akurat</span>
                             </div>
                             <div class="card-body">
                                 <div class="result-grid">
                                     <div class="result-box">
-                                        <label><i class="fa-solid fa-virus"></i> Jenis Ulcer</label>
+                                        <label>Jenis Ulcer</label>
                                         <div class="value" id="res-type">-</div>
                                     </div>
                                     <div class="result-box">
-                                        <label><i class="fa-solid fa-triangle-exclamation"></i> Keparahan</label>
+                                        <label>Keparahan</label>
                                         <div class="value" id="res-severity">-</div>
                                     </div>
                                 </div>
                                 <div class="recommendation-box">
-                                    <h4><i class="fa-solid fa-prescription-bottle-medical"></i> Rekomendasi</h4>
+                                    <h4>Rekomendasi</h4>
                                     <p id="res-recommendation">-</p>
                                 </div>
                             </div>
@@ -103,42 +164,23 @@
             <section id="tab-edukasi" class="tab-content">
                 <div class="edu-grid">
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="fa-solid fa-tooth"></i> Merawat Kesehatan Mulut</h3>
-                        </div>
+                        <div class="card-header"><h3><i class="fa-solid fa-tooth"></i> Kesehatan Mulut</h3></div>
                         <div class="card-body">
                             <ul class="edu-list">
-                                <li><strong>Sikat Gigi 2x Sehari:</strong> Pagi setelah sarapan dan malam sebelum tidur.</li>
-                                <li><strong>Bersihkan Lidah:</strong> Gunakan pembersih lidah untuk menghilangkan bakteri penyebab bau mulut.</li>
-                                <li><strong>Flossing:</strong> Gunakan benang gigi untuk membersihkan sisa makanan di sela gigi yang tidak terjangkau sikat.</li>
-                                <li><strong>Ganti Sikat Gigi:</strong> Lakukan setiap 3-4 bulan sekali atau jika bulu sikat sudah mekar.</li>
+                                <li><strong>Sikat Gigi 2x Sehari:</strong> Pagi dan malam.</li>
+                                <li><strong>Bersihkan Lidah:</strong> Menghilangkan bakteri penyebab bau.</li>
+                                <li><strong>Flossing:</strong> Membersihkan sela gigi yang sempit.</li>
                             </ul>
                         </div>
                     </div>
-
                     <div class="card">
-                        <div class="card-header">
-                            <h3 class="card-title"><i class="fa-solid fa-shield-virus"></i> Pencegahan Sariawan</h3>
-                        </div>
+                        <div class="card-header"><h3><i class="fa-solid fa-shield-virus"></i> Cegah Sariawan</h3></div>
                         <div class="card-body">
                             <ul class="edu-list">
-                                <li><strong>Cukupi Nutrisi:</strong> Konsumsi makanan kaya Vitamin C, B12, dan Zinc (sayuran hijau, jeruk, telur).</li>
-                                <li><strong>Hidrasi:</strong> Minum air putih minimal 2 liter sehari untuk menjaga kelembapan mukosa mulut.</li>
-                                <li><strong>Kelola Stres:</strong> Stres tinggi dapat memicu munculnya sariawan rekuren (kambuhan).</li>
-                                <li><strong>Hindari Pemicu:</strong> Kurangi makanan terlalu pedas, asam, atau keras yang dapat melukai gusi.</li>
+                                <li><strong>Nutrisi:</strong> Vitamin C, B12, dan Zinc.</li>
+                                <li><strong>Hidrasi:</strong> Minum air putih minimal 2 liter.</li>
+                                <li><strong>Stres:</strong> Kelola stres agar imunitas terjaga.</li>
                             </ul>
-                        </div>
-                    </div>
-
-                    <div class="card wide-card">
-                        <div class="card-body">
-                            <div class="info-alert">
-                                <i class="fa-solid fa-circle-info"></i>
-                                <div>
-                                    <h4>Kapan harus ke dokter gigi?</h4>
-                                    <p>Jika sariawan tidak kunjung sembuh lebih dari 2 minggu, bertambah luas secara cepat, atau disertai demam tinggi.</p>
-                                </div>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -146,16 +188,13 @@
 
             <section id="tab-riwayat" class="tab-content">
                 <div class="coming-soon">
-                    <div class="cs-icon">
-                        <i class="fa-solid fa-hourglass-half"></i>
-                    </div>
+                    <i class="fa-solid fa-hourglass-half cs-icon"></i>
                     <h2>Coming Soon!</h2>
-                    <p>Fitur riwayat sedang dalam tahap pengembangan. Nantinya Anda dapat menyimpan dan melihat kembali hasil skrining Anda untuk memantau proses penyembuhan.</p>
+                    <p>Fitur riwayat sedang dalam tahap pengembangan.</p>
                 </div>
             </section>
-
-        </div> </main>
-    
+        </div>
+    </main>
     <script src="script.js"></script>
 </body>
 </html>
