@@ -1,8 +1,9 @@
 # 🩺 UlcerScan: Deteksi Dini Sariawan di Ujung Jari
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
+![Flask](https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white)
 ![TensorFlow](https://img.shields.io/badge/TensorFlow-FF6F00?style=for-the-badge&logo=tensorflow&logoColor=white)
-![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
+![Railway](https://img.shields.io/badge/Railway-131415?style=for-the-badge&logo=railway&logoColor=white)
 
 Selamat datang di **UlcerScan**! Pernah merasa terganggu dengan sariawan yang tak kunjung sembuh tapi ragu untuk langsung ke dokter? Proyek ini hadir sebagai asisten digital cerdas yang membantu Anda mengenali kondisi kesehatan mulut melalui teknologi analisis gambar secara instan.
 
@@ -36,12 +37,14 @@ Pantau perkembangan kesehatan Anda! Fitur ini memungkinkan pengguna untuk menyim
 
 ## 🛠️ Teknologi yang Digunakan
 
+Berdasarkan arsitektur sistem, berikut adalah teknologi yang mendukung **UlcerScan**:
+
 | Komponen | Teknologi |
 | :--- | :--- |
-| **Frontend** | HTML5, CSS3, JavaScript |
-| **Backend** | Python (Flask/FastAPI) |
-| **AI Model** | TensorFlow / PyTorch |
-| **Database** | SQLite / PostgreSQL |
+| **Frontend** | HTML, CSS, JavaScript |
+| **Backend** | Python, Flask, Gunicorn |
+| **Machine Learning** | TensorFlow, OpenCV, Numpy |
+| **Deployment** | Git, Railway.app |
 
 ---
 
