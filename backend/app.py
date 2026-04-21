@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
 import tensorflow as tf
 import numpy as np
@@ -81,13 +81,14 @@ def preprocess_image(image_path):
 
 # ===== RUTE UTAMA (HOME) =====
 # Menambahkan rute ini agar tidak muncul pesan "Not Found" saat membuka URL utama
-@app.route('/', methods=['GET'])
+@app.route('/')
 def index():
-    return jsonify({
-        "message": "Server DentaScreen (Ulcerscan) Aktif!",
-        "status": "Online",
-        "endpoint_prediksi": "/api/predict"
-    })
+    return send_from_directory('static', 'index.html')
+
+# Rute ini wajib ada agar file style.css dan script.js di folder 'static' bisa terbaca
+@app.route('/<path:path>')
+def serve_static(path):
+    return send_from_directory('static', path)
 
 # ===== ENDPOINT: HEALTH CHECK =====
 @app.route('/api/health', methods=['GET'])
